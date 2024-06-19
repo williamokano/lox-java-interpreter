@@ -13,3 +13,29 @@ easy to follow and very didactic. I wish studying compilers in Uni were that eas
 
 Since, for now, it's "just" an interpreter, I created a gradle task in which you can run your examples to test:
 just run `./gradlew processLoxFile -Pfile=examples/print_statements.lox`. You can rename the file you want to execute.
+
+## Grammar
+
+Here you can find the current grammar (BNF - Backus-Naur Form) for the language. If it's here, most likely it's implemented:
+
+```text
+program        → statement* EOF ;
+
+statement      → exprStmt
+               | printStmt ;
+
+exprStmt       → expression ";" ;
+printStmt      → "print" expression ";" ;
+
+expression     → literal
+               | unary
+               | binary
+               | grouping ;
+
+literal        → NUMBER | STRING | "true" | "false" | "nil" ;
+grouping       → "(" expression ")" ;
+unary          → ( "-" | "!" ) expression ;
+binary         → expression operator expression ;
+operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
+               | "+"  | "-"  | "*" | "/" ;
+```
