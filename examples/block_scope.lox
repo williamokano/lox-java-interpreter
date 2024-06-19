@@ -1,0 +1,12 @@
+var my_name = "Jorge";
+
+my_name = "Heisenburger";
+
+{
+    //var my_name = "WHAAAAAT";
+    my_name = "Marcos";
+
+    print my_name;
+}
+
+print my_name;
