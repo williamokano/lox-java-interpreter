@@ -3,6 +3,7 @@ package okano.dev.lox;
 import java.util.List;
 
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
+    private Environment environment = new Environment();
 
     void interpret(List<Stmt> statements) {
         try {
@@ -88,7 +89,11 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
             // This should be unreachable
             default -> null;
         };
+    }
 
+    @Override
+    public Object visitVariableExpr(Expr.Variable expr) {
+        return environment.get(expr.name);
     }
 
     private void checkNumberOperand(Token operator, Object operand) {
@@ -149,5 +154,23 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         Object value = evaluate(stmt.expression);
         System.out.println(stringify(value));
         return null;
+    }
+
+    @Override
+    public Void visitVarStmt(Stmt.Var stmt) {
+        Object value = null;
+        if (stmt.initializer != null) {
+            value = evaluate(stmt.initializer);
+        }
+
+        environment.define(stmt.name.lexeme, value);
+        return null;
+    }
+
+    @Override
+    public Object visitAssignExpr(Expr.Assign expr) {
+        Object value = evaluate(expr.value);
+        environment.assign(expr.name, value);
+        return value;
     }
 }

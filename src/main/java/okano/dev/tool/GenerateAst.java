@@ -1,12 +1,8 @@
 package okano.dev.tool;
 
-import okano.dev.lox.Lox;
-
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,15 +15,18 @@ public class GenerateAst {
         String outputDir = System.getProperty("user.dir") + "/src/main/java/" + packagePath;
 
         defineAst(outputDir, "Expr", Arrays.asList(
+                "Assign   : Token name, Expr value",
                 "Binary   : Expr left, Token operator, Expr right",
                 "Grouping : Expr expression",
                 "Literal  : Object value",
-                "Unary    : Token operator, Expr right"
+                "Unary    : Token operator, Expr right",
+                "Variable : Token name"
         ));
 
         defineAst(outputDir, "Stmt", Arrays.asList(
                 "Expression : Expr expression",
-                "Print      : Expr expression"
+                "Print      : Expr expression",
+                "Var        : Token name, Expr initializer"
         ));
     }
 

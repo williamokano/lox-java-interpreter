@@ -19,7 +19,12 @@ just run `./gradlew processLoxFile -Pfile=examples/print_statements.lox`. You ca
 Here you can find the current grammar (BNF - Backus-Naur Form) for the language. If it's here, most likely it's implemented:
 
 ```text
-program        → statement* EOF ;
+program        → declaration* EOF ;
+
+declaration    → varDecl
+               | statement ;
+
+varDecl        → "var" IDENTIFIER ( "=" expression )? ";" ;
 
 statement      → exprStmt
                | printStmt ;
@@ -27,7 +32,12 @@ statement      → exprStmt
 exprStmt       → expression ";" ;
 printStmt      → "print" expression ";" ;
 
-expression     → literal
+expression     → assignment ;
+
+assignment     → IDENTIFIER "=" assignment
+               | equality ;
+               
+equality       → literal
                | unary
                | binary
                | grouping ;
@@ -35,6 +45,9 @@ expression     → literal
 literal        → NUMBER | STRING | "true" | "false" | "nil" ;
 grouping       → "(" expression ")" ;
 unary          → ( "-" | "!" ) expression ;
+primary        → "true" | "false" | "nil" | "this"
+               | NUMBER | STRING | IDENTIFIER | "(" expression ")"
+               | "super" "." IDENTIFIER ;
 binary         → expression operator expression ;
 operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
                | "+"  | "-"  | "*" | "/" ;
