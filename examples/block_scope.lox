@@ -1,12 +1,19 @@
-var my_name = "Jorge";
-
-my_name = "Heisenburger";
-
+var a = "global a";
+var b = "global b";
+var c = "global c";
 {
-    //var my_name = "WHAAAAAT";
-    my_name = "Marcos";
-
-    print my_name;
+  var a = "outer a";
+  var b = "outer b";
+  {
+    var a = "inner a";
+    print a;
+    print b;
+    print c;
+  }
+  print a;
+  print b;
+  print c;
 }
-
-print my_name;
+print a;
+print b;
+print c;
