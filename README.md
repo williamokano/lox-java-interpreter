@@ -39,19 +39,20 @@ expression     → assignment ;
 
 assignment     → IDENTIFIER "=" assignment
                | equality ;
-               
-equality       → literal
-               | unary
-               | binary
-               | grouping ;
 
-literal        → NUMBER | STRING | "true" | "false" | "nil" ;
-grouping       → "(" expression ")" ;
-unary          → ( "-" | "!" ) expression ;
-primary        → "true" | "false" | "nil" | "this"
-               | NUMBER | STRING | IDENTIFIER | "(" expression ")"
-               | "super" "." IDENTIFIER ;
-binary         → expression operator expression ;
-operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
-               | "+"  | "-"  | "*" | "/" ;
+equality       → comparison ( ( "!=" | "==" ) comparison )* ;
+
+comparison     → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
+
+term           → factor ( ( "-" | "+" ) factor )* ;
+
+factor         → unary ( ( "/" | "*" ) unary )* ;
+
+unary          → ( "!" | "-" ) unary
+               | primary ;
+
+primary        → "true" | "false" | "nil"
+               | NUMBER | STRING
+               | "(" expression ")"
+               | IDENTIFIER ;
 ```
