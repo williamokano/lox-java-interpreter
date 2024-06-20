@@ -107,7 +107,6 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         throw new RuntimeError(operator, "Operands must be numbers.");
     }
 
-
     private boolean isTruthy(Object object) {
         if (object == null) return false;
         if (object instanceof Boolean) return (boolean) object;
