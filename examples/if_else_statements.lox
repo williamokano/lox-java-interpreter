@@ -1,0 +1,13 @@
+var name = "okano";
+
+if (name) {
+    print "Name is: " + name;
+} else {
+    print "Name is not defined";
+}
+
+if (name == "jorge") {
+    print "The name is Jorge";
+} else {
+    print "It's not Jorge, its " + name;
+}
