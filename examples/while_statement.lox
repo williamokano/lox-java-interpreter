@@ -1,0 +1,6 @@
+var loopCount = 0;
+
+while (loopCount < 10) {
+    print "This loop iteration is number: " + loopCount;
+    loopCount = loopCount + 1;
+}
