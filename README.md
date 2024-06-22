@@ -6,7 +6,7 @@ the website [Crafting Interpreters](https://craftinginterpreters.com/statements-
 This is just a study case / compilers/interpreters study, and it's not meant to be production ready nor benchmarked
 for anything.
 
-All credits to the author of the website and the Lox language, your work is awesome,
+All credits go to the author of the website and the Lox language, your work is awesome,
 easy to follow and very didactic. I wish studying compilers in Uni were that easy in my Uni time.
 
 ## Running examples
@@ -16,7 +16,7 @@ just run `./gradlew processLoxFile -Pfile=examples/print_statements.lox`. You ca
 
 ## Grammar
 
-Here you can find the current grammar (BNF - Backus-Naur Form) for the language. If it's here, most likely it's implemented:
+Here you can find the current grammar (BNF-ish - Backus-Naur Form) for the language. If it's here, most likely it's implemented:
 
 ```text
 program        → declaration* EOF ;
