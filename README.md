@@ -3,7 +3,7 @@
 This is an attempt to implement the Lox language, as described in
 the website [Crafting Interpreters](https://craftinginterpreters.com/statements-and-state.html) in Java.
 
-This is just a study case / compilers/interpreters study and it's not meant to be production ready not benchmark
+This is just a study case / compilers/interpreters study, and it's not meant to be production ready nor benchmarked
 for anything.
 
 All credits to the author of the website and the Lox language, your work is awesome,
