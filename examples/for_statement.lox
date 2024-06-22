@@ -1,0 +1,12 @@
+var a = 0;
+var temp;
+
+var maxFibonacci = 10000;
+
+print "Printing Fibonacci sequence that are smaller than: " + maxFibonacci;
+
+for (var b = 1; a < maxFibonacci; b = temp + b) {
+  print a;
+  temp = a;
+  a = b;
+}
