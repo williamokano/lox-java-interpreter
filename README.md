@@ -21,8 +21,15 @@ Here you can find the current grammar (BNF-ish - Backus-Naur Form) for the langu
 ```text
 program        → declaration* EOF ;
 
-declaration    → varDecl
+declaration    → funDecl
+               | varDecl
                | statement ;
+
+funDecl        → "fun" function ;
+
+function       → IDENTIFIER "(" parameters? ")" block ;
+
+parameters     → IDENTIFIER ( "," IDENTIFIER )* ;
 
 varDecl        → "var" IDENTIFIER ( "=" expression )? ";" ;
 
@@ -30,6 +37,7 @@ statement      → exprStmt
                | forStmt
                | ifStmt
                | printStmt
+               | returnStmt
                | whileStmt
                | block ;
 
@@ -43,6 +51,8 @@ ifStmt         → "if" "(" expression ")" statement
                ( "else" statement )? ;
 
 printStmt      → "print" expression ";" ;
+
+returnStmt     → "return" expression? ";" ;
 
 whileStmt      → "while" "(" expression ")" statement ;
 
@@ -66,7 +76,11 @@ term           → factor ( ( "-" | "+" ) factor )* ;
 factor         → unary ( ( "/" | "*" ) unary )* ;
 
 unary          → ( "!" | "-" ) unary
-               | primary ;
+               | call ;
+
+call           → primary ( "(" arguments? ")" )* ;
+
+arguments      → expression ( "," expression )* ;
 
 primary        → "true" | "false" | "nil"
                | NUMBER | STRING
