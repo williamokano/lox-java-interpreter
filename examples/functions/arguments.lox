@@ -1,0 +1,7 @@
+var globalStr = "! Sent from LOX language!";
+
+fun sayHi(first, last) {
+  print "Hi, " + first + " " + last + globalStr + "!";
+}
+
+sayHi("Dear", "Reader");
