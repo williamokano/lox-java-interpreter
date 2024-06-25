@@ -1,0 +1,8 @@
+fun bad() {
+  var a = "first";
+  var a = "second"; // This should generate a compile error
+
+  print a;
+}
+
+bad(); // If it prints "second", the compiler is not working as intended
