@@ -1,0 +1,23 @@
+// Returning a value from a constructor is not allowed.
+// However, an empty return statement is permitted
+// for the sake of object calisthenics, enabling early
+// returns for guard clauses.
+class Foo {
+  init(name) {
+    this.name = name;
+    this.role = "user";
+
+    if (this.name != "okano") {
+        return;
+    }
+
+    // This isn't the best example, but it gets the idea of early returns across.
+    this.role = "superpoweruseradmin";
+  }
+}
+
+var foo = Foo("okano");
+print foo.name + " is " + foo.role;
+
+var bar = Foo("bar");
+print foo.name + " is " + bar.role;

@@ -1,0 +1,9 @@
+// Classes are like maps, a bag of dynamic properties and methods
+class Bagel {}
+var bagel = Bagel();
+
+bagel.price = 10.00;
+
+bagel.price = bagel.price + 20.33;
+
+print "The Bagel price is: " + bagel.price;

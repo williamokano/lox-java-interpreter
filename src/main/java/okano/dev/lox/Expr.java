@@ -10,11 +10,17 @@ abstract public class Expr {
 
         R visitCallExpr(Call expr);
 
+        R visitGetExpr(Get expr);
+
         R visitGroupingExpr(Grouping expr);
 
         R visitLiteralExpr(Literal expr);
 
         R visitLogicalExpr(Logical expr);
+
+        R visitSetExpr(Set expr);
+
+        R visitThisExpr(This expr);
 
         R visitUnaryExpr(Unary expr);
 
@@ -71,6 +77,21 @@ abstract public class Expr {
         final List<Expr> arguments;
     }
 
+    static public class Get extends Expr {
+        Get(Expr object, Token name) {
+            this.object = object;
+            this.name = name;
+        }
+
+        @Override
+        <R> R accept(Visitor<R> visitor) {
+            return visitor.visitGetExpr(this);
+        }
+
+        final Expr object;
+        final Token name;
+    }
+
     static public class Grouping extends Expr {
         Grouping(Expr expression) {
             this.expression = expression;
@@ -112,6 +133,36 @@ abstract public class Expr {
         final Expr left;
         final Token operator;
         final Expr right;
+    }
+
+    static public class Set extends Expr {
+        Set(Expr object, Token name, Expr value) {
+            this.object = object;
+            this.name = name;
+            this.value = value;
+        }
+
+        @Override
+        <R> R accept(Visitor<R> visitor) {
+            return visitor.visitSetExpr(this);
+        }
+
+        final Expr object;
+        final Token name;
+        final Expr value;
+    }
+
+    static public class This extends Expr {
+        This(Token keyword) {
+            this.keyword = keyword;
+        }
+
+        @Override
+        <R> R accept(Visitor<R> visitor) {
+            return visitor.visitThisExpr(this);
+        }
+
+        final Token keyword;
     }
 
     static public class Unary extends Expr {

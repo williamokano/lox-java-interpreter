@@ -21,9 +21,9 @@ Here you can find the current grammar (BNF-ish - Backus-Naur Form) for the langu
 ```text
 program        → declaration* EOF ;
 
-declaration    → funDecl
-               | varDecl
-               | statement ;
+declaration    → classDecl | funDecl | varDecl | statement ;
+
+classDecl      → "class" IDENTIFIER "{" function* "}" ;
 
 funDecl        → "fun" function ;
 
@@ -33,13 +33,7 @@ parameters     → IDENTIFIER ( "," IDENTIFIER )* ;
 
 varDecl        → "var" IDENTIFIER ( "=" expression )? ";" ;
 
-statement      → exprStmt
-               | forStmt
-               | ifStmt
-               | printStmt
-               | returnStmt
-               | whileStmt
-               | block ;
+statement      → exprStmt | forStmt | ifStmt | printStmt | returnStmt | whileStmt | block ;
 
 exprStmt       → expression ";" ;
 
@@ -60,8 +54,7 @@ block          → "{" declaration* "}" ;
 
 expression     → assignment ;
 
-assignment     → IDENTIFIER "=" assignment
-                | logic_or ;
+assignment     → ( call "." )? IDENTIFIER "=" assignment | logic_or ;
 
 logic_or       → logic_and ( "or" logic_and )* ;
 
@@ -75,15 +68,11 @@ term           → factor ( ( "-" | "+" ) factor )* ;
 
 factor         → unary ( ( "/" | "*" ) unary )* ;
 
-unary          → ( "!" | "-" ) unary
-               | call ;
+unary          → ( "!" | "-" ) unary | call ;
 
-call           → primary ( "(" arguments? ")" )* ;
+call           → primary ( "(" arguments? ")" | "." IDENTIFIER )* ;
 
 arguments      → expression ( "," expression )* ;
 
-primary        → "true" | "false" | "nil"
-               | NUMBER | STRING
-               | "(" expression ")"
-               | IDENTIFIER ;
+primary        → "true" | "false" | "nil" | NUMBER | STRING | "(" expression ")" | IDENTIFIER ;
 ```
