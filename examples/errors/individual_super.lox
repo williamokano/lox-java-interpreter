@@ -1,0 +1,15 @@
+print super; // Syntax error.
+
+class Doughnut {
+  cook() {
+    print "Fry until golden brown.";
+  }
+}
+
+class BostonCream < Doughnut {
+  cook() {
+    print super;
+    super.cook();
+    print "Pipe full of custard and coat with chocolate.";
+  }
+}
